@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/** 
+ * Controls the player
+ * Author: Eric Tran
+ * Version: 4/18/2022
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,8 +35,10 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && isOnGround && !gameOver)
         {
+            //allows the player to jump
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
+            //Plays animations, particles, and sounds
             playerAnim.SetTrigger("Jump_trig");
             dirtParticle.Stop();
             playerAudio.PlayOneShot(jumpSound, 1.0f);
@@ -49,6 +56,7 @@ public class PlayerController : MonoBehaviour
         {
             gameOver = true;
             Debug.Log("Game Over!");
+            //plays animations, sounds, and particles
             playerAnim.SetBool("Death_b", true);
             playerAnim.SetInteger("DeathType_int", 1);
             explosionParticle.Play();
